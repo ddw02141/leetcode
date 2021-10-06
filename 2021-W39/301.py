@@ -1,12 +1,11 @@
 from typing import List
-from itertools import product, combinations
+from itertools import combinations
 
 
 class Solution:
     def removeInvalidParentheses(self, s: str) -> List[str]:
         left = s.count('(')
         right = s.count(')')
-        # print("left",left,"right",right)
         answers = set()
         indicesWithLeft = [i for i, x in enumerate(s) if x == '(']
         indicesWithRight = [i for i, x in enumerate(s) if x == ')']
@@ -18,7 +17,6 @@ class Solution:
                 for index in indicies:
                     newS = newS[:index] + " " + newS[index + 1:]
                 newS = newS.replace(" ", "")
-                # print("newS", newS)
                 possible_answers.add(newS)
         elif right > left:
             indicesCombi = combinations(indicesWithRight, right - left)
@@ -30,7 +28,6 @@ class Solution:
                 possible_answers.add(newS)
         else:  # left == right
             possible_answers.add(s)
-        # print("possible_answers", possible_answers)
         for ss in possible_answers:
             indicesWithLeft = [i for i, x in enumerate(ss) if x == '(']
             indicesWithRight = [i for i, x in enumerate(ss) if x == ')']
@@ -40,16 +37,12 @@ class Solution:
                 for indiciesL in indicesCombiLeft:
                     newS = ss[:]
                     for indexL in indiciesL:
-                        # print("indexL", indexL)
                         newS = newS[:indexL] + " " + newS[indexL + 1:]
-                    # print("newS", newS)
                     for indiciesR in indicesCombiRight:
                         newNewS = newS[:]
                         for indexR in indiciesR:
-                            # print("indexR", indexR)
                             newNewS = newNewS[:indexR] + " " + newNewS[indexR + 1:]
                         newNewS = newNewS.replace(" ", "")
-                        # print("newNewS", newNewS)
                         if newNewS and self.isValid(newNewS):
                             answers.add(newNewS)
         if self.isValid(s):
