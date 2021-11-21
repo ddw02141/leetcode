@@ -18,7 +18,7 @@ class Solution:
                 assert curFuncId == funcId
                 timeSpend = timestamp - curTimestamp + 1
                 times[curIdx] += timeSpend
-                stack.pop(-1)
+                stack.pop()
                 for _, prevIdx, _ in stack:
                     times[prevIdx] -= times[curIdx]
         answer = [0 for _ in range(n)]
