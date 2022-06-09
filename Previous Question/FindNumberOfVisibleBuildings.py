@@ -48,13 +48,11 @@ def findNumberOfVisibleBuildings(heights):
             if heights[last] <= height:
                 numVisible[last] += 1
                 indicesWithIncreasingHeights.pop()
-                continue
-            # 나보다 높거나 같은 건물은 아니면서, 마지막으로 본 건물보다 높으면 볼 수 있다.
-            elif lastVisibleHeights[last] < height:
-                numVisible[last] += 1
-                lastVisibleHeights[last] = height
-                break
             else:
+                # 나보다 높거나 같은 건물은 아니면서, 마지막으로 본 건물보다 높으면 볼 수 있다.
+                if lastVisibleHeights[last] < height:
+                    numVisible[last] += 1
+                    lastVisibleHeights[last] = height
                 break
         # 자신보다 큰 빌딩이 뒤에 나오면 그 빌딩은 이제 끝난다.
         if i < len(heights) - 1:
