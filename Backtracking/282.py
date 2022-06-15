@@ -20,9 +20,9 @@ class Solution:
                     # For first number
                     backtrack(idx + j, cur + n, n, resultStr + s)
                 else:
-                    backtrack(idx + j, cur + n, n, resultStr + "+" + s)
-                    backtrack(idx + j, cur - n, -n, resultStr + "-" + s)
-                    backtrack(idx + j, cur - prev + prev * n, prev * n, resultStr + "*" + s)
+                    backtrack(idx + j, cur + n, n, f"{resultStr}+{s}")
+                    backtrack(idx + j, cur - n, -n, f"{resultStr}-{s}")
+                    backtrack(idx + j, cur - prev + prev * n, prev * n, f"{resultStr}*{s}")
 
         answer = []
         backtrack(0, 0, 0, "")
